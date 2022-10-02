@@ -42,5 +42,20 @@ exports.Mutation = {
     db.reviews.push(newReview);
     return newReview;
   },
-  deleteCategory: (parent, { id }, { categories }) => {},
+  deleteCategory: (parent, { categoryId }, { categories, products }) => {
+    const index = categories.findIndex(
+      (category) => category.id === categoryId
+    );
+    if (index === -1) return false;
+    products.map((product) => {
+      if (product.categoryId === categoryId)
+        return {
+          ...product,
+          categoryId: null,
+        };
+      return product;
+    });
+    categories.splice(index, 1);
+    return true;
+  },
 };
