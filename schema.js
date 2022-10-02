@@ -51,6 +51,14 @@ exports.typeDefs = gql`
     productId: ID!
   }
 
+  input AddReviewInput {
+    date: String
+    title: String!
+    comment: String!
+    rating: Float!
+    productId: ID!
+  }
+
   input ProductsFilterInput {
     onSale: Boolean
     minimumRating: Int
