@@ -4,14 +4,14 @@ exports.Query = {
   },
   products: (parent, { filters }, { products, reviews }) => {
     let filteredProducts = products;
-    const { onSale, minimumRating } = filters;
+    
     if (filters) {
-      if (onSale != null) {
+      if (filters.onSale != null) {
         filteredProducts = filteredProducts.filter(
           (product) => product.onSale === filters.onSale
         );
       }
-      if (minimumRating != null && minimumRating >= 1 && minimumRating <= 5) {
+      if (filters.minimumRating != null && filters.minimumRating >= 1 && filters.minimumRating <= 5) {
         filteredProducts = filteredProducts.filter((product) => {
           let sum = 0;
           let count = 0;
