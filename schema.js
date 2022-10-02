@@ -47,15 +47,7 @@ exports.typeDefs = gql`
     date: String
     title: String!
     comment: String!
-    rating: Float!
-    productId: ID!
-  }
-
-  input AddReviewInput {
-    date: String
-    title: String!
-    comment: String!
-    rating: Float!
+    rating: Int!
     productId: ID!
   }
 
