@@ -1,10 +1,10 @@
 exports.Category = {
-  products: ({ id }, { filters }, { products }) => {
+  products: ({ id }, { filters }, { db }) => {
     if (filters && filters.onSale != null)
-      return products.filter(
+      return db.products.filter(
         (product) =>
           product.categoryId === id && product.onSale === filters.onSale
       );
-    return products.filter((product) => product.categoryId === id);
+    return db.products.filter((product) => product.categoryId === id);
   },
 };
