@@ -42,12 +42,12 @@ exports.Mutation = {
     db.reviews.push(newReview);
     return newReview;
   },
-  deleteCategory: (parent, { categoryId }, { categories, products }) => {
-    const index = categories.findIndex(
+  deleteCategory: (parent, { categoryId }, { db }) => {
+    const index = db.categories.findIndex(
       (category) => category.id === categoryId
     );
     if (index === -1) return false;
-    products.map((product) => {
+    db.products.map((product) => {
       if (product.categoryId === categoryId)
         return {
           ...product,
@@ -55,7 +55,16 @@ exports.Mutation = {
         };
       return product;
     });
-    categories.splice(index, 1);
+    db.categories.splice(index, 1);
+    return true;
+  },
+  deleteProduct: (parent, { id }, { db }) => {
+    db.products = db.products.filter((product) => product.id !== id);
+    db.reviews = db.reviews.filter((review) => review.productId !== id);
+    return true;
+  },
+  deleteReview: (parent, { id }, { db }) => {
+    db.reviews = db.reviews.filter((review) => review.id !== id);
     return true;
   },
 };
